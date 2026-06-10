@@ -1,12 +1,12 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI FAQ Chatbot</title>
+<title>AI FAQ Assistant</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -15,214 +15,66 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#f4f4f4;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+background:linear-gradient(135deg,#4f46e5,#6366f1);
 }
 
-.chat-container{
-width:700px;
+.container{
 background:white;
+padding:50px;
 border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,0.2);
-overflow:hidden;
-}
-
-.header{
-background:#4f46e5;
-color:white;
-padding:20px;
 text-align:center;
+width:700px;
+box-shadow:0 0 15px rgba(0,0,0,0.2);
 }
 
-.messages{
-height:400px;
-overflow-y:auto;
-padding:15px;
-background:#f9fafb;
+h1{
+color:#4f46e5;
+font-size:40px;
+margin-bottom:20px;
 }
 
-.message{
-padding:10px;
-margin:10px 0;
-border-radius:10px;
-max-width:80%;
-}
-
-.bot{
-background:#e5e7eb;
-}
-
-.user{
-background:#4f46e5;
-color:white;
-margin-left:auto;
-text-align:right;
-}
-
-.suggestions{
-padding:10px;
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-background:#f9fafb;
-}
-
-.suggestions button{
-padding:8px 12px;
-background:#4f46e5;
-color:white;
-border:none;
-border-radius:20px;
-cursor:pointer;
-}
-
-.input-area{
-display:flex;
-padding:10px;
-border-top:1px solid #ddd;
-}
-
-input{
-flex:1;
-padding:10px;
-font-size:16px;
-border:1px solid #ccc;
-border-radius:5px;
+p{
+font-size:18px;
+margin-bottom:30px;
 }
 
 button{
-padding:10px 20px;
+padding:15px 30px;
+font-size:18px;
 background:#4f46e5;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:8px;
 cursor:pointer;
 }
+
+button:hover{
+background:#3730a3;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="chat-container">
+<div class="container">
 
-<div class="header">
-<h2>🤖 AI FAQ Chatbot</h2>
-</div>
+<h1>🤖 AI FAQ Assistant</h1>
 
-<div id="messages" class="messages">
-<div class="message bot">
-Hello! Ask me anything about AI.
-</div>
-</div>
+<p>
+Welcome to the AI FAQ Chatbot.
+Get answers to Artificial Intelligence questions instantly.
+</p>
 
-<div class="suggestions">
-<button onclick="setQuestion('What is AI')">What is AI?</button>
-<button onclick="setQuestion('What is Machine Learning')">Machine Learning</button>
-<button onclick="setQuestion('Explain ChatGPT')">ChatGPT</button>
-<button onclick="setQuestion('What is NLP')">NLP</button>
-<button onclick="setQuestion('What is Computer Vision')">Computer Vision</button>
-</div>
-
-<div class="input-area">
-<input
-id="userInput"
-type="text"
-placeholder="Ask a question..."
-onkeypress="if(event.key==='Enter') sendMessage()">
-
-<button onclick="sendMessage()">Send</button>
-</div>
+<button onclick="window.location.href='chatbot.html'">
+Start Chatting
+</button>
 
 </div>
-
-<script>
-
-const faqs = [
-{
-q:"ai",
-a:"Artificial Intelligence (AI) is the simulation of human intelligence by machines."
-},
-{
-q:"machine learning",
-a:"Machine Learning is a branch of AI that learns patterns from data."
-},
-{
-q:"chatgpt",
-a:"ChatGPT is an AI chatbot developed by OpenAI."
-},
-{
-q:"nlp",
-a:"Natural Language Processing helps computers understand human language."
-},
-{
-q:"computer vision",
-a:"Computer Vision enables computers to understand images and videos."
-}
-];
-
-function addMessage(text,type){
-
-const messages=document.getElementById("messages");
-
-const div=document.createElement("div");
-
-div.className="message "+type;
-
-div.textContent=text;
-
-messages.appendChild(div);
-
-messages.scrollTop=messages.scrollHeight;
-}
-
-function findAnswer(question){
-
-question=question.toLowerCase();
-
-for(let faq of faqs){
-
-if(question.includes(faq.q)){
-return faq.a;
-}
-
-}
-
-return "Sorry, I couldn't find an answer.";
-}
-
-function sendMessage(){
-
-const input=document.getElementById("userInput");
-
-const text=input.value.trim();
-
-if(text==="") return;
-
-addMessage(text,"user");
-
-input.value="";
-
-setTimeout(()=>{
-
-const answer=findAnswer(text);
-
-addMessage(answer,"bot");
-
-},500);
-}
-
-function setQuestion(question){
-
-document.getElementById("userInput").value=question;
-
-sendMessage();
-}
-
-</script>
 
 </body>
 </html>
-```
